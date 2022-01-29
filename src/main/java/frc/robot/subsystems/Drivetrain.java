@@ -5,11 +5,12 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.drive.MecanumDrive;
-import edu.wpi.first.wpilibj2.command.MecanumControllerCommand;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+import com.ctre.phoenix.motorcontrol.InvertType;
+
 
 
 public class Drivetrain extends SubsystemBase {
@@ -21,25 +22,21 @@ public class Drivetrain extends SubsystemBase {
     private WPI_TalonSRX m_frontRight = new WPI_TalonSRX(Constants.c_frontRightMotor);
     private WPI_TalonSRX m_backRight = new WPI_TalonSRX(Constants.c_backRightMotor);
 
-    //Invert the right motors(because of updates)
-    
-
     
     //Mecanum Drive Consturctor 
     private MecanumDrive drive = new MecanumDrive(m_frontLeft, m_backLeft, m_frontRight, m_backRight);
 
   public Drivetrain() {
-    //Don't need to put anything in here
   }
 
   //Drive Method
-  //movementSpeed - speed along y axis, right is positive
-  //strafeSpeed - speed along x axis, forward is positive
-  //turningspeed - rotation rate around the z axis, clockwise is positve
-  public void driveCartesian(double movementSpeed, double strafeSpeed, double turningSpeed){
+  //yAxisSpeed - speed along y axis, right is positive
+  //xAxisSpeed - speed along x axis, forward is positive
+  //zAxisspeed - rotation rate around the z axis, clockwise is positve
+  public void driveCartesian(double yAxisSpeed, double xAxisSpeed, double zAxisSpeed){
     //drive.driveCartesian(-strafeSpeed, movementSpeed, turningSpeed);
     //what we did for FRC 2020
-    //drive.driveCartesian(movementSpeed, strafeSpeed, turningSpeed);
+    drive.driveCartesian(yAxisSpeed, -xAxisSpeed, zAxisSpeed);
     
   }
 

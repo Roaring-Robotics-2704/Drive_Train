@@ -12,12 +12,13 @@ package frc.robot;
  * <p>It is advised to statically import this class (or one of its inner classes) wherever the
  * constants are needed, to reduce verbosity.
  */
+
 public final class Constants {
     //number that stay constant throughout the code
     //ports
     //drive motors
-    public static int c_frontRightMotor = 1;
-    public static int c_frontLeftMotor = 2;
+    public static int c_frontRightMotor = 2;
+    public static int c_frontLeftMotor = 1;
     public static int c_backRightMotor = 3;
     public static int c_backLeftMotor = 4;
     //joystick

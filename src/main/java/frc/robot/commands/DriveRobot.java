@@ -6,7 +6,6 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj.Joystick;
-import frc.robot.Robot;
 import frc.robot.RobotContainer;
 import frc.robot.Constants;
 
@@ -22,44 +21,27 @@ public class DriveRobot extends CommandBase {
   public void initialize() {}
   //don't need to put anything in here
 
-  /*private double processInput(double joystickValue) {
-    // deadband
-    if (-Constants.c_deadBand <= joystickValue && joystickValue <= Constants.c_deadBand){
-        return 0;
-    }
-    // scaling
-    if (joystickValue <= 0){
-        return - Math.pow(joystickValue, Constants.c_inputScaling);
-    }
-    else{
-        return Math.pow(joystickValue, Constants.c_inputScaling);
-    }
-  }*/
-
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
     //getx - along the x axis
     //gety - along the y axis
     //getz - along the z axis
-    //double xInput = processInput(RobotContainer.joystick.getX());
-    //double yInput = processInput(RobotContainer.joystick.getY());
-    //double zInput = processInput(RobotContainer.joystick.getZ());
-
-    double xInput = RobotContainer.joystick.getX()*0.5;
-    double yInput = RobotContainer.joystick.getY()*0.5;
-    double zInput = RobotContainer.joystick.getZ()*0.5;
+    //make sure that movement speed is x
+    double joystickXInput = -RobotContainer.joystick.getX()*0.5;
+    double joystickYInput = -RobotContainer.joystick.getY()*0.5;
+    double joystickZInput = RobotContainer.joystick.getZ()*0.5;
     double deadzone = 0.2;
     double turnDeadzone = 0.25;
 
     if (Math.abs(RobotContainer.joystick.getX()) < deadzone) {
-      xInput = 0;
+      joystickXInput = 0;
     }
     if (Math.abs(RobotContainer.joystick.getY()) < deadzone) {
-      yInput = 0;
+      joystickYInput = 0;
     }
     if (Math.abs(RobotContainer.joystick.getZ()) < turnDeadzone) {
-      zInput = 0;
+      joystickZInput = 0;
     }
     
     //call driveCartesion from Drive Train
@@ -67,7 +49,7 @@ public class DriveRobot extends CommandBase {
     //movementSpeed - speed along y axis, right is positive
     //strafeSpeed - speed along x axis, forward is positive
     //turningspeed - rotation rate around the z axis, clockwise is positve
-    RobotContainer.m_driveTrain.driveCartesian(yInput, xInput, zInput);
+    RobotContainer.m_driveTrain.driveCartesian(joystickYInput, joystickXInput, joystickZInput);
   }
 
   // Called once the command ends or is interrupted.
